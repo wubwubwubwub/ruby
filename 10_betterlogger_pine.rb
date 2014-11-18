@@ -1,0 +1,50 @@
+$nestingDepth = 0
+
+def log descOfBlock, &block
+  spaces = "  " * $nestingDepth
+
+  $nestingDepth += 1
+
+  puts "#{spaces}Beginning '#{descOfBlock}'..."
+  x = block.call
+  puts "#{spaces}...'#{descOfBlock}' finished, returning: #{x}"
+
+  $nestingDepth -= 1
+
+end
+
+
+log "outer block" do
+  log "some little block" do
+    log "teeny-tiny block" do
+      "lots of love"
+    end
+    42
+  end
+  log "yet another block" do
+    "I love Indian food!"
+  end
+  true
+end
+
+
+# $nesting_depth = 0
+# $space = '  '
+
+# def log block_description, &block
+#   puts $space*$nesting_depth + 'Beginning "'+block_description+'" ...'
+
+#   $nesting_depth += 1
+#   value_returned = block.call
+#   $nesting_depth -= 1 
+
+#   puts $space*$nesting_depth + '... "'+block_description+'" finished, returning:'
+#   puts $space*$nesting_depth + value_returned.to_s
+# end
+
+# log "outer block" do
+#   log "inner block" do
+#     "lame duck"
+#   end
+#   42
+# end
